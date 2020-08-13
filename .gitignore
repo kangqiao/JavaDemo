@@ -1,0 +1,17 @@
+.DS_Store
+
+.gradle/
+
+.idea/
+*iml
+*.iml
+*.log
+*.class
+*.dex
+
+fastlane
+captures/
+/captures
+
+/build
+*/build

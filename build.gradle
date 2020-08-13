@@ -1,0 +1,52 @@
+
+buildscript {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        mavenCentral()
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.aspectj:aspectjtools:1.9.5'
+    }
+}
+
+
+plugins {
+    id 'java'
+}
+
+group 'com.zp.demo'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven { url 'https://maven.aliyun.com/repository/google' }
+    maven { url 'https://maven.aliyun.com/repository/jcenter' }
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+
+    maven { url 'https://jitpack.io' }
+    maven { url "https://repo.spring.io/milestone" }
+    mavenCentral()
+    google()
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    implementation('org.aspectj:aspectjweaver:1.+')
+    implementation('org.aspectj:aspectjrt:1.+')
+    implementation('com.squareup:javapoet:1.12.1')
+    implementation('cglib:cglib:3.3.0')
+    implementation('org.javassist:javassist:+')
+
+    implementation("io.projectreactor:reactor-core:3.4.0-M1")
+    testImplementation("io.projectreactor:reactor-test:3.4.0-M1")
+
+    //implementation("io.reactivex.rxjava2:rxjava:2.+")
+    implementation("io.reactivex.rxjava3:rxjava:3.+")
+
+}
