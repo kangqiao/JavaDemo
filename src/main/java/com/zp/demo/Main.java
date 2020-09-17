@@ -1,5 +1,12 @@
 package com.zp.demo;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.function.BinaryOperator;
 
@@ -70,5 +77,20 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void httpSSL() throws IOException {
+        final URL htmlUrl = new URL("https://1.1.1.1/");
+        HttpsURLConnection connection = (HttpsURLConnection) htmlUrl.openConnection();
+        connection.setRequestProperty("Host","www.meipai.com");
+        connection.setHostnameVerifier(new HostnameVerifier() {
+            @Override
+            public boolean verify(String hostname, SSLSession session) {
+                return HttpsURLConnection.getDefaultHostnameVerifier()
+                        .verify("www.meipai.com",session);
+            }
+        });
+
+        InetAddress.getAllByName("www.meipai.com");
     }
 }
