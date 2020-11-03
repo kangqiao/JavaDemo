@@ -1,5 +1,6 @@
 package com.zp.demo.kotlin
 
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
@@ -10,6 +11,31 @@ import kotlin.system.measureTimeMillis
 
 // note that we don't have `runBlocking` to the right of `main` in this example
 fun main() {
+    //testRunBlocking()
+    testAsyncAwait()
+}
+
+fun testRunBlocking() = runBlocking<Unit> {
+    val time = measureTimeMillis {
+        val one = doSomethingUsefulOne()
+        val two = doSomethingUsefulTwo()
+        println("The answer is ${one + two}")
+    }
+    println("Completed in $time ms")
+}
+
+fun testAsync() {
+//    measureTimeMillis {
+//        val one = async(start = CoroutineStart.LAZY) { doSomethingUsefulOne() }
+//        val two = async(start = CoroutineStart.LAZY) { doSomethingUsefulTwo() }
+//        // 执行一些计算
+//        one.start() // 启动第一个
+//        two.start() // 启动第二个
+//        println("The answer is ${one.await() + two.await()}")
+//    }
+}
+
+fun testAsyncAwait() {
     val time = measureTimeMillis {
         // we can initiate async actions outside of a coroutine
         val one = somethingUsefulOneAsync()
@@ -32,11 +58,13 @@ fun somethingUsefulTwoAsync() = GlobalScope.async {
 }
 
 suspend fun doSomethingUsefulOne(): Int {
-    delay(Duration.ofSeconds(1)) // pretend we are doing something useful here
+    // delay(Duration.ofMillis(1000)) // pretend we are doing something useful here
+    Thread.sleep(1000)
     return 13
 }
 
 suspend fun doSomethingUsefulTwo(): Int {
-    delay(Duration.ofSeconds(1)) // pretend we are doing something useful here, too
+    //delay(Duration.ofMillis(10000)) // pretend we are doing something useful here, too
+    Thread.sleep(1000)
     return 29
 }
