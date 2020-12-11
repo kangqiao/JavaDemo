@@ -44,7 +44,37 @@ public class DeleteEvenByArrayList {
         list.add(1);list.add(9);list.add(3);list.add(2);list.add(4);list.add(5);
         list.add(2);list.add(7);
         System.out.println(list);
-        deleteEven2(list);
+        delEven3(list);
         System.out.println(list);
     }
+
+    private static void delEven3(ArrayList<Integer> list) {
+        if (null == list || list.isEmpty()) return;
+
+        int n = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) % 2 == 1) {
+                list.set(n++, list.get(i));
+            }
+        }
+
+        for (int i = list.size() - 1; i >= n; i--) {
+            list.remove(i);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -1,4 +1,4 @@
-package com.zp.demo.algorithm;
+package com.zp.demo.algorithm.tree;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -30,5 +30,29 @@ public class 广度优先遍历 {
             levelOrder.add(0, list);
         }
         return levelOrder;
+    }
+
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> levelList = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            List<Integer> list = new ArrayList<>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                list.add(node.val);
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+            levelList.add(list);
+        }
+        return levelList;
     }
 }

@@ -1,4 +1,4 @@
-package com.zp.test.leetcode.charset;
+package com.zp.demo.algorithm.charset;
 
 //给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
 //

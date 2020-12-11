@@ -1,4 +1,4 @@
-package com.zp.demo.algorithm;
+package com.zp.demo.algorithm.tree;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

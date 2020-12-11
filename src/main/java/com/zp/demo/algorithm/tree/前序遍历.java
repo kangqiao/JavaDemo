@@ -1,38 +1,38 @@
-package com.zp.demo.algorithm;
+package com.zp.demo.algorithm.tree;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class 中序遍历 {
+public class 前序遍历 {
 
     //递归实现
-    public List<Integer> inorderTraversal(TreeNode root) {
+    public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
-        inorder(root, list);
+        preorder(root, list);
         return list;
     }
 
-    private void inorder(TreeNode root, List<Integer> list) {
-        if (root != null ) {
-            inorder(root.left, list);
+    private void preorder(TreeNode root, List<Integer> list) {
+        if (root != null) {
             list.add(root.val);
-            inorder(root.right, list);
+            preorder(root.left, list);
+            preorder(root.right, list);
         }
     }
 
     //栈实现
-    public List<Integer> inorderTraversal2(TreeNode root) {
+    public List<Integer> preorderTraversal2(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         LinkedList<TreeNode> stack = new LinkedList<>();
         TreeNode pNode = root;
         while (pNode != null || !stack.isEmpty()) {
             if (pNode != null) {
                 stack.push(pNode);
+                list.add(pNode.val);
                 pNode = pNode.left;
             } else {
                 TreeNode node = stack.pop();
-                list.add(node.val);
                 pNode = pNode.right;
             }
         }
