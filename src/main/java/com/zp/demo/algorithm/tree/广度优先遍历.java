@@ -55,4 +55,26 @@ public class 广度优先遍历 {
         }
         return levelList;
     }
+
+    public int[] levelOrderArr(TreeNode root) {
+        int[] ret = new int[0];
+        List<Integer> list = new ArrayList<>();
+        if (null == root) return new int[0];
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                list.add(node.val);
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+        }
+        return list.stream().mapToInt(i->i).toArray();
+    }
 }

@@ -46,4 +46,41 @@ public class BinaryTree {
             list.add(root.val);
         }
     }
+
+    /**
+     * 从数组的某个位置的元素开始生成树
+     * 约定：二叉树采用宽度优先遍历来数组化，二叉树的节点按照BFS的顺序依次存储在数组内，数组中的’#’代表空节点，末尾的’#’可省略。
+     *     1
+     *    / \
+     *   2   3
+     *  / \   \
+     * 4   5   6
+     *    / \
+     *   7   8
+     * 这棵树会被序列化为：{1,2,3,4,5,#,6,#,#,7,8}，后面的四个#被省略。
+     */
+    public static TreeNode createTree(int[] list, int start) {
+        if (list == null || list.length == 0 || list[start] == '#') {
+            return null;
+        }
+
+        TreeNode root = new TreeNode(list[start]);
+        int left = 2 * start + 1;
+        int right = 2 * start + 2;
+        if (left > list.length - 1) {
+            root.left = null;
+        } else {
+            root.left = createTree(list, left);
+        }
+
+        if (right > list.length - 1) {
+            root.right = null;
+        } else {
+            root.right = createTree(list, right);
+        }
+
+        return root;
+    }
+
+
 }

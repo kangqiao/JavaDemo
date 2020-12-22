@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class 中序遍历 {
+public class 中序遍历LC94 {
 
     //递归实现
     public List<Integer> inorderTraversal(TreeNode root) {

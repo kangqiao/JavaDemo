@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LC144二叉树前序遍历 {
+public class 前序遍历LC144 {
 
+    //递归实现
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         preorder(root, list);
@@ -20,6 +21,7 @@ public class LC144二叉树前序遍历 {
         }
     }
 
+    //栈实现
     public List<Integer> preorderTraversal2(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         LinkedList<TreeNode> stack = new LinkedList<>();
@@ -37,6 +39,7 @@ public class LC144二叉树前序遍历 {
         return list;
     }
 
+    //栈实现
     public List<Integer> preorderTraversal3(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         LinkedList<TreeNode> stack = new LinkedList<>();
