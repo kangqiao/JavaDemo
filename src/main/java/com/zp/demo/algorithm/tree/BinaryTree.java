@@ -11,7 +11,7 @@ public class BinaryTree {
         return list;
     }
 
-    public static void preorder(TreeNode root, List<Integer> list) {
+    private static void preorder(TreeNode root, List<Integer> list) {
         if (root != null) {
             list.add(root.val);
             preorder(root.left, list);

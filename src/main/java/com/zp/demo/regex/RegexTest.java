@@ -23,11 +23,24 @@ public class RegexTest {
 //        int a = 12345 / 2;
 //        Zlog.log(a+"");
 
-        testA();
-        testB();
 
-        AtomicInteger a = new AtomicInteger(0);
-        a.getAndAdd(0);
+        testC();
+//        testA();
+//        testB();
+//        AtomicInteger a = new AtomicInteger(0);
+//        a.getAndAdd(0);
+    }
+
+    private static void testC() {
+        Pattern pattern = Pattern.compile("^(?!/-/x/uc/uc/open).*$");
+        String path = "/-/x/uc/uc/open/security/get";
+        Zlog.log(String.format("%s => %b", path, pattern.matcher(path).matches()));
+        path = "/-/x/uc/open/security/get";
+        Zlog.log(String.format("%s => %b", path, pattern.matcher(path).matches()));
+        path = "uc/uc/open/security/get";
+        Zlog.log(String.format("%s => %b", path, pattern.matcher(path).matches()));
+        path = "/-/x/amount/123";
+        Zlog.log(String.format("%s => %b", path, pattern.matcher(path).matches()));
     }
 
     private static void matchPathRule(String path, String regex) {
