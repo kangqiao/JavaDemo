@@ -1,4 +1,4 @@
-package com.zp.test.leetcode;
+package com.zp.demo.algorithm;
 
 //给定一个只包含三种字符的字符串：（ ，） 和 *，写一个函数来检验这个字符串是否为有效字符串。有效字符串具有如下规则：
 //

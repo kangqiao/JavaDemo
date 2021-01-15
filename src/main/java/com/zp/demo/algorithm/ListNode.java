@@ -1,4 +1,4 @@
-package com.zp.test.leetcode;
+package com.zp.demo.algorithm;
 
 public class ListNode {
     int value;

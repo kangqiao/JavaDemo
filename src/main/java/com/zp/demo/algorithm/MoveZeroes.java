@@ -1,4 +1,4 @@
-package com.zp.test.leetcode;//给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+package com.zp.demo.algorithm;//给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
 //
 // 示例: 
 //

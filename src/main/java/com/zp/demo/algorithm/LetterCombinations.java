@@ -1,4 +1,4 @@
-package com.zp.test.leetcode;
+package com.zp.demo.algorithm;
 
 //给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
 //

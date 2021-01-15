@@ -36,6 +36,7 @@ package com.zp.demo.algorithm.simple;
 //leetcode submit region begin(Prohibit modification and deletion)
 import com.zp.demo.Zlog;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -219,8 +220,78 @@ class LC双指针 {
      * @return
      */
     public List<Integer> findAnagrams(String s, String t) {
+        HashMap<Character, Integer> need = new HashMap<>(), window = new HashMap<>();
+        for (char c: t.toCharArray()) need.put(c, need.getOrDefault(c, 0) + 1);
 
-        return null;
+        int left = 0, right = 0, valid = 0;
+        List<Integer> res = new ArrayList<>(); //记录结果
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            right++;
+            //进行窗口内数据的一系列更新
+            if (need.containsKey(c)) {
+                window.put(c, window.getOrDefault(c, 0) + 1);
+                if (window.get(c) == need.get(c)) valid++;
+            }
+
+            // 判断左侧窗口是否要收缩
+            while (right - left >= t.length()) {
+                //当窗口符合条件时, 把超始索引加入res
+                if (valid == need.size()) {
+                    res.add(left);
+                }
+                char d = s.charAt(left);
+                left++;
+                //进行窗口内数据的一系列更新
+                if (need.containsKey(d)) {
+                    if (window.get(d) == need.get(d)) valid--;
+                    window.put(d, window.get(d) - 1);
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 最长无重复子串
+     * 这是 LeetCode 第 3 题，Longest Substring Without Repeating Characters，难度 Medium：
+     *
+     * //输入: s = "abcabcbb"
+     * //输出: 3
+     * //解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+     *
+     * //输入: s = "bbbbb"
+     * //输出: 1
+     * //解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+     *
+     * //输入: s = "pwwkew"
+     * //输出: 3
+     * //解释: 因为无重复字符的最长子串是"wke"，所以其长度为 3。
+     * //     请注意，你的答案必须是 子串 的长度，"pwke"是一个子序列，不是子串。
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character, Integer> window = new HashMap<>();
+        int left = 0, right = 0;
+        int res = 0; //记录结果
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            right++;
+            //进行窗口内数据的一系列更新
+            window.put(c, window.getOrDefault(c, 0) + 1);
+            //判断左侧窗口是否要收缩
+            while (window.get(c) > 1) {
+                char d = s.charAt(left);
+                left ++;
+                //进行窗口内数据的一系列更新
+                window.put(d, window.get(d) - 1);
+            }
+            //在这里更新答案
+            res = Math.max(res, right - left);
+        }
+
+        return res;
     }
 
     public static void main(String[] args) {
@@ -231,6 +302,11 @@ class LC双指针 {
 
         Zlog.log("=======================");
         Zlog.log(instance.minWindow("ADOBECODEBANC", "ABC"));
+        Zlog.log(""+instance.checkInclusion("ab", "eidbaooo"));
+        Zlog.log(""+instance.findAnagrams("cbaebabacd", "abc"));
+        Zlog.log(""+instance.lengthOfLongestSubstring("abcabcbb"));
+        Zlog.log(""+instance.lengthOfLongestSubstring("bbbbb"));
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
