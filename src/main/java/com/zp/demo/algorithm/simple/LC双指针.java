@@ -35,6 +35,7 @@ package com.zp.demo.algorithm.simple;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 import com.zp.demo.Zlog;
+import com.zp.demo.algorithm.model.ListNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +44,49 @@ import java.util.List;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class LC双指针 {
+
+    /**
+     * 141. 环形链表
+     * 给定一个链表，判断链表中是否有环。
+     * @param head
+     * @return
+     */
+    public boolean hasCycle(ListNode head) {
+        ListNode fast, slow;
+        fast = slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) return true;
+        }
+        return false;
+    }
+
+    /**
+     * 142. 环形链表 II
+     * 给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
+     * @param head
+     * @return
+     */
+    public ListNode detectCycle(ListNode head) {
+        ListNode fast, slow;
+        fast = slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) break;
+        }
+        if (fast == null || fast.next == null) {
+            // fast 遇到空指针说明没有环
+            return null;
+        }
+        slow = head;
+        while (slow != fast) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
 
     /**
      * 二分查找
