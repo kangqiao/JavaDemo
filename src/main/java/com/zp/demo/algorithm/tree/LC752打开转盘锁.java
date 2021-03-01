@@ -74,16 +74,58 @@ class LC752打开转盘锁 {
         LC752打开转盘锁 instance = new LC752打开转盘锁();
         //输入: deadends = ["8888"], target = "0009" 输出：1
         String[] deadends = new String[]{"8888"};
-        Zlog.log("LC752打开转盘锁 " + instance.openLock(deadends, "0009"));
+        Zlog.log("LC752打开转盘锁 " + instance.openLock2(deadends, "0009"));
         //输入: deadends = ["8887","8889","8878","8898","8788","8988","7888","9888"], target = "8888" 输出：-1
         deadends = new String[]{"8887","8889","8878","8898","8788","8988","7888","9888"};
-        Zlog.log("LC752打开转盘锁 " + instance.openLock(deadends, "8888"));
+        Zlog.log("LC752打开转盘锁 " + instance.openLock2(deadends, "8888"));
         //输入：deadends = ["0201","0101","0102","1212","2002"], target = "0202" 输出：6
         deadends = new String[]{"0201","0101","0102","1212","2002"};
-        Zlog.log("LC752打开转盘锁 " + instance.openLock(deadends, "0202"));
+        Zlog.log("LC752打开转盘锁 " + instance.openLock2(deadends, "0202"));
         //输入: deadends = ["0000"], target = "8888" 输出：-1
         deadends = new String[]{"0000"};
-        Zlog.log("LC752打开转盘锁 " + instance.openLock(deadends, "8888"));
+        Zlog.log("LC752打开转盘锁 " + instance.openLock2(deadends, "8888"));
+    }
+
+    /**
+     * 双向BFS 解法
+     * @param deadends
+     * @param target
+     * @return
+     */
+    public int openLock2(String[] deadends, String target) {
+        Set<String> deads = new HashSet<>();
+        for (String s: deadends) deads.add(s);
+        Set<String> q1 = new HashSet<>();
+        Set<String> q2 = new HashSet<>();
+        Set<String> visited = new HashSet<>();
+        //初始化起点
+        q1.add("0000");
+        q2.add(target);
+        int step = 0;
+
+        while (!q1.isEmpty() && !q2.isEmpty()) {
+            Set<String> temp = new HashSet<>();
+            for (String cur: q1) {
+                if (deads.contains(cur)) continue;
+                if (q2.contains(cur)) return step;
+                visited.add(cur);
+
+                for (int i = 0; i < 4; i++) {
+                    String up = plusOne(cur, i);
+                    if (!visited.contains(up)) temp.add(up);
+                    String down = minusOne(cur, i);
+                    if (!visited.contains(down)) temp.add(down);
+                }
+            }
+            step++;
+            q1 = temp;
+            if (q1.size() > q2.size()) {
+                temp = q2;
+                q2 = q1;
+                q1 = temp;
+            }
+        }
+        return -1;
     }
 
     public int openLock(String[] deadends, String target) {
