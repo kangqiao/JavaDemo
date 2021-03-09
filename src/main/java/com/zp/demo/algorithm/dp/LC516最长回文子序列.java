@@ -41,12 +41,36 @@ public class LC516最长回文子序列 {
         return dp[0][n-1];
     }
 
+
+    public int longestPalindromeSubseq2(String s) {
+        int n = s.length();
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+
+        for (int i=n-2; i>=0; i--) {
+            int pre = 0;
+            for (int j=i+1; j<n; j++) {
+                int temp = dp[j];
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[j] = pre + 2;
+                } else {
+                    dp[j] = Math.max(dp[j], dp[j-1]);
+                }
+                pre = temp;
+            }
+        }
+
+        return dp[n-1];
+    }
+
     public static void main(String[] args) {
         LC516最长回文子序列 instance = new LC516最长回文子序列();
         String s = "bbbab";
-        System.out.println(s + " => " + instance.longestPalindromeSubseq(s));
+        System.out.println(s + " 1=> " + instance.longestPalindromeSubseq(s));
+        System.out.println(s + " 2=> " + instance.longestPalindromeSubseq2(s));
 
         s = "aecda";
-        System.out.println(s + " => " + instance.longestPalindromeSubseq(s));
+        System.out.println(s + " 1=> " + instance.longestPalindromeSubseq(s));
+        System.out.println(s + " 2=> " + instance.longestPalindromeSubseq2(s));
     }
 }
