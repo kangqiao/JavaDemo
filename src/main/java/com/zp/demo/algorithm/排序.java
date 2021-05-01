@@ -5,7 +5,8 @@ public class 排序 {
         int[] nums = new int[] {4, 5, 3, 1, 2};
         //bubbleSort(nums);
         //selectSort(nums);
-        insertSort(nums);
+        //insertSort(nums);
+        quickSort(nums, 0, nums.length -1);
         for (int i=0; i < nums.length; i++) {
             System.out.print(nums[i] + " ");
         }
@@ -53,6 +54,20 @@ public class 排序 {
                 swap(nums, minIndex, i);
             }
         }
+    }
+
+    //快速排序 O(nlog2n)
+    public static void quickSort(int[] nums, int l, int r) {
+        int i=l, j=r, t=nums[l];
+        while (i < j) {
+            while (i < j && nums[j] > t) j--;
+            if (i<j) nums[i++] = nums[j];
+            while (i < j && nums[i] < t) i++;
+            if (i<j) nums[j--] = nums[i];
+        }
+        nums[i] = t;
+        if (l < i-1) quickSort(nums, l, i - 1);
+        if (r > i+1) quickSort(nums, i + 1, r);
     }
 
 

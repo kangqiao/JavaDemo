@@ -8,6 +8,8 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.BinaryOperator;
 
 public class Main {
@@ -46,13 +48,31 @@ public class Main {
 //
 //        Zlog.log(Runnable.class.getCanonicalName());
 
-        String bstr = new String("asgdhfjg我".getBytes(), Charset.defaultCharset());
-        Zlog.log("" + bstr.length());
-        Zlog.log("" + bstr.getBytes().length);
-        int l = String.valueOf('c').getBytes().length;
-        Zlog.log(""+l);
-        int l2 = String.valueOf('我').getBytes().length;
-        Zlog.log(""+l2);
+//        String bstr = new String("asgdhfjg我".getBytes(), Charset.defaultCharset());
+//        Zlog.log("" + bstr.length());
+//        Zlog.log("" + bstr.getBytes().length);
+//        int l = String.valueOf('c').getBytes().length;
+//        Zlog.log(""+l);
+//        int l2 = String.valueOf('我').getBytes().length;
+//        Zlog.log(""+l2);
+//
+//        int arr[] = new int[]{12, 1, 12, 3, 12, 1, 1, 2, 3,3};
+//        System.out.println("getSingle = " + getSingle(arr, arr.length));
+//        arr = new int[]{10, 20, 10, 30, 10, 30, 30};
+//        System.out.println("getSingle = " + getSingle(arr, arr.length));
+
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("aaa").append(",").append("bbb").append(",");
+        sb.deleteCharAt(sb.length()-1);
+        System.out.println(sb.toString());
+
+        System.out.println("===============");
+        String str1 = new StringBuilder("计算机").append("软件").toString();
+        System.out.println(str1.intern() == str1);
+
+        String str2 = new StringBuilder("ja").append("va").toString();
+        System.out.println(str2.intern() == str2);
     }
 
     /**
@@ -92,5 +112,40 @@ public class Main {
         });
 
         InetAddress.getAllByName("www.meipai.com");
+    }
+
+    /**
+     * 输入: arr[] = {12, 1, 12, 3, 12, 1, 1, 2, 3,3}
+     * 输出: 2
+     * 除了2其它都出现3次。
+     *
+     * 输入: arr[] = {10, 20, 10, 30, 10, 30, 30}
+     * 输出: 20
+     * 除了20其它都出现3次。
+     * @param arr
+     * @param n
+     * @return
+     */
+    static int getSingle(int arr[], int n) {
+        Set<Integer> set = new HashSet<>();
+        int sum = 0, sumInner = 0;
+        for (int i=0; i<n; i++) {
+            if (!set.contains(arr[i])) {
+                set.add(arr[i]);
+                sumInner += arr[i];
+            }
+            sum += arr[i];
+        }
+        return Math.abs(sum - sumInner - sumInner - sumInner) / 2;
+    }
+
+    public void test111() {}
+    static void test() {
+        Main main = new Main() {
+            @Override
+            public void test111() {
+                super.test111();
+            }
+        };
     }
 }

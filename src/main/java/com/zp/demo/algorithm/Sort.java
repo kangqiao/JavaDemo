@@ -31,7 +31,7 @@ public class Sort {
 
     public static void main(String[] args) {
         int[] nums = new int[]{4,5,2,6,8,9,1,7,3};
-        quickSort(nums, 0, nums.length);
+        quickSort(nums, 0, nums.length-1);
         for (int i=0; i<nums.length; i++) {
             System.out.print(nums[i] + " ");
         }
