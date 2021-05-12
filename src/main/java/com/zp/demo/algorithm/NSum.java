@@ -71,7 +71,7 @@ public class NSum {
             stack.addLast(nums[i]);
             int tmp = target - nums[i];
             if (tmp > 0) {
-                backTrace(nums, i + 1, target - nums[i], stack, result);
+                backTrace(nums, i + 1, tmp, stack, result);
             } else if (tmp == 0) {
                 result.add(Arrays.asList(stack.toArray(new Integer[]{})));
             }
@@ -147,8 +147,8 @@ public class NSum {
 
     public static void main(String[] args) {
         NSum instance = new NSum();
-        int[] nums = new int[]{1, 2, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10};
-        int target = 10;
+        int[] nums = new int[]{1, 2, 3, 4, 5, 6};
+        int target = 6;
         List<List<Integer>> ret = instance.allSumTarget(nums, target);
 
         System.out.println("--------------------------");

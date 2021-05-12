@@ -8,8 +8,11 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BinaryOperator;
 
 public class Main {
@@ -73,6 +76,11 @@ public class Main {
 
         String str2 = new StringBuilder("ja").append("va").toString();
         System.out.println(str2.intern() == str2);
+    }
+
+    private <T> void genericMethod(T t) {
+        List<T> list = new ArrayList<T>();
+
     }
 
     /**
