@@ -5,11 +5,28 @@ import com.zp.demo.algorithm.model.TreeNode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 广度优先遍历: 需要使用队列
  */
 public class 广度优先遍历 {
+    public void levelOrder2(TreeNode root) {
+        if (root == null) return ;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while (!q.isEmpty()) {
+            TreeNode cur = q.poll();
+            System.out.println(cur.val);
+            if (cur.left != null) {
+                q.offer(cur.left);
+            }
+            if (cur.right != null) {
+                q.offer(cur.right);
+            }
+        }
+
+    }
 
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> levelOrder = new LinkedList<>();

@@ -7,7 +7,7 @@ import com.zp.demo.algorithm.model.TreeNode;
  * 在一个二叉树中, 任意节点的值要大于等于左子树的所有节点的值, 且要小于等于右子树的所有节点的值.
  * 二叉树算法的设计总路线: 明确一个节点要做的事情, 然后剩下的事抛给递归框架.
  */
-public class BST {
+public class BST二叉搜索树 {
 
     /**
      * 把二叉树的所有节点中的值 +1
@@ -85,5 +85,30 @@ public class BST {
            root.right = insertIntoBST(root.right, val);
        }
        return root;
+    }
+
+    public static TreeNode deleteNode(TreeNode root, int val) {
+        if (root == null) return null;
+        if (root.val == val) {
+            if (root.left == null) return root.right;
+            if (root.right == null) return root.left;
+            //处理左右子节点都不为空的情况
+            //找到右子树最小节点
+            TreeNode minNode = getMin(root.right);
+            root.val = minNode.val;
+            root.right = deleteNode(root.right, minNode.val);
+        }
+        if(root.val > val) {
+            root.left = deleteNode(root.left, val);
+        }
+        if (root.val < val) {
+            root.right = deleteNode(root.right, val);
+        }
+        return root;
+    }
+
+    private static TreeNode getMin(TreeNode root) {
+        while (root.left != null) root = root.left;
+        return root;
     }
 }

@@ -5,7 +5,20 @@ import com.zp.demo.algorithm.model.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 二叉树的操作
+ */
 public class BinaryTree {
+
+    /**
+     * 求二叉树的节点个数
+     * @param root
+     * @return
+     */
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
 
     public static List<Integer> preorder(TreeNode root) {
         List<Integer> list = new ArrayList<>();
