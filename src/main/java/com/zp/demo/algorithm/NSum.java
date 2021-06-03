@@ -68,7 +68,18 @@ public class NSum {
         backTrace(nums, 0, target, new ArrayDeque<>(), result);
         return result;
     }
-    private void backTrace(int[] nums, int start, int target, Deque<Integer> stack, List<List<Integer>> result) {
+    private void backTrace(int[] nums, int start, int target, Deque<Integer> trace, List<List<Integer>> result) {
+        if (target < 0) return ;
+        if (target == 0) {
+            result.add(Arrays.asList(trace.toArray(new Integer[]{})));
+        }
+        for (int i=start; i<nums.length; i++) {
+            trace.addLast(nums[i]);
+            backTrace(nums, i + 1, target - nums[i], trace, result);
+            trace.removeLast();
+        }
+    }
+    private void backTrace2(int[] nums, int start, int target, Deque<Integer> stack, List<List<Integer>> result) {
         for (int i=start; i<nums.length; i++) {
             stack.addLast(nums[i]);
             int tmp = target - nums[i];
@@ -149,7 +160,7 @@ public class NSum {
 
     public static void main(String[] args) {
         NSum instance = new NSum();
-        int[] nums = new int[]{1, 2, 3, 4, 5, 6};
+        int[] nums = new int[]{1, 2, 3, 4, 0, 5, 6};
         int target = 6;
         List<List<Integer>> ret = instance.allSumTarget(nums, target);
 
