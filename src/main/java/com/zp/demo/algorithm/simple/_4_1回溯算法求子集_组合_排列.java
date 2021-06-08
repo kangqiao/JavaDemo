@@ -82,8 +82,8 @@ public class _4_1回溯算法求子集_组合_排列 {
 
     /**
      * 求子集(回溯法)
-     * @param nums
-     * @return
+     * @param nums = [1,2,3]
+     * @return [[],[1],[1, 2],[1, 2, 3],[1, 3],[2],[2, 3],[3]]
      */
     public List<List<Integer>> subsets3(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
