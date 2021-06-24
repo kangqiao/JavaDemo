@@ -1,10 +1,106 @@
-package com.zp.demo.algorithm;
+package com.zp.demo.algorithm.simple;
 
-import kotlinx.coroutines.internal.ArrayQueue;
 
 import java.util.*;
 
-public class NSum {
+public class _4_6_NSum {
+
+    /**
+     * 求nums数组中满足和等于target的一个组合。
+     */
+    public int[] twoSum(int[] nums, int target) {
+        //先对数组排序
+        Arrays.sort(nums);
+        //左右指针
+        int lo = 0, hi = nums.length - 1;
+        while (lo < hi) {
+            int sum = nums[lo] + nums[hi];
+            if (sum < target) {
+                lo++;
+            } else if (sum > target) {
+                hi--;
+            } else {
+                return new int[]{nums[lo], nums[hi]};
+            }
+        }
+        return new int[]{};
+    }
+
+    /**
+     * 求nums数组中满足和等于target的所有组合（不重复）
+     * 例如nums=[1,3,1,2,2,3] target = 4 算法返回[[1,3],[2,2]]
+     */
+    public List<List<Integer>> twoSumTarget(int[] nums, int target) {
+        //排序
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        int lo = 0, hi = nums.length - 1;
+        while (lo < hi) {
+            int sum = nums[lo] + nums[hi];
+            //根据sum和target的比较，移动左、右指针
+            int left = nums[lo], right = nums[hi];
+            if (sum < target) {
+                while (lo < hi && nums[lo] == left) lo++;
+            } else if (sum > target) {
+                while (lo < hi && nums[hi] == right) hi--;
+            } else {
+                res.add(Arrays.asList(nums[lo], nums[hi]));
+                while (lo < hi && nums[lo] == left) lo++;
+                while (lo < hi && nums[hi] == right) hi--;
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 利用twoSumTarget计算thressSumTarget
+     * @param nums
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> threeSumTarget(int[] nums, int target) {
+        //数组排序
+        Arrays.sort(nums);
+        int n = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        //穷举threeSum的第一个数
+        for (int i=0; i<n; i++) {
+            List<List<Integer>> tuples = twoSumTargetForThree(nums, i+1, target - nums[i]);
+            //如果存在满足条件的二元组，再加上nums[i]就是结果三元组
+            for (List<Integer> tuple: tuples) {
+                tuple.add(nums[i]);
+                res.add(tuple);
+            }
+            //跳过第一个数字重复的情况，否则会出现重复结果
+            while (i < n - 1 && nums[i] == nums[i+1]) i++;
+        }
+        return res;
+    }
+
+    //为threeSumTarget计算剩余的twoSum集合。
+    private List<List<Integer>> twoSumTargetForThree(int[] nums, int start, int target) {
+        int lo = start, hi = nums.length - 1;
+        List<List<Integer>> res = new ArrayList<>();
+        while (lo < hi) {
+            int sum = nums[lo] + nums[hi];
+            //根据sum和target的比较，移动左、右指针
+            int left = nums[lo], right = nums[hi];
+            if (sum < target) {
+                while (lo < hi && nums[lo] == left) lo++;
+            } else if (sum > target) {
+                while (lo < hi && nums[hi] == right) hi--;
+            } else {
+                List<Integer> list = new ArrayList<>();
+                list.add(nums[lo]);
+                list.add(nums[hi]);
+                res.add(list);
+                while (lo < hi && nums[lo] == left) lo++;
+                while (lo < hi && nums[hi] == right) hi--;
+            }
+        }
+        return res;
+    }
+
 
     //给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复
     //的三元组。
@@ -118,7 +214,15 @@ public class NSum {
         return ret;
     }
 
-    private List<List<Integer>> nSumTarget(int[] nums, int n, int start, int target) {
+    /**
+     * NSum的解决方案。*******
+     * @param nums 源数组
+     * @param n 要求出的几个数之和
+     * @param start 从start下标开始统计
+     * @param target 目标数
+     * @return
+     */
+    public List<List<Integer>> nSumTarget(int[] nums, int n, int start, int target) {
         int sz = nums.length;
         List<List<Integer>> res = null;
         //至少是2数之和, 且数组大小不应该小于n
@@ -159,7 +263,7 @@ public class NSum {
     }
 
     public static void main(String[] args) {
-        NSum instance = new NSum();
+        _4_6_NSum instance = new _4_6_NSum();
         int[] nums = new int[]{1, 2, 3, 4, 0, 5, 6};
         int target = 6;
         List<List<Integer>> ret = instance.allSumTarget(nums, target);
