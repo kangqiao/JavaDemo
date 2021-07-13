@@ -65,17 +65,32 @@ public class Main {
 //        System.out.println("getSingle = " + getSingle(arr, arr.length));
 
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("aaa").append(",").append("bbb").append(",");
-        sb.deleteCharAt(sb.length()-1);
-        System.out.println(sb.toString());
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("aaa").append(",").append("bbb").append(",");
+//        sb.deleteCharAt(sb.length()-1);
+//        System.out.println(sb.toString());
+//
+//        System.out.println("===============");
+//        String str1 = new StringBuilder("计算机").append("软件").toString();
+//        System.out.println(str1.intern() == str1);
+//
+//        String str2 = new StringBuilder("ja").append("va").toString();
+//        System.out.println(str2.intern() == str2);
 
-        System.out.println("===============");
-        String str1 = new StringBuilder("计算机").append("软件").toString();
-        System.out.println(str1.intern() == str1);
 
-        String str2 = new StringBuilder("ja").append("va").toString();
-        System.out.println(str2.intern() == str2);
+        String source = "function wrapTime(time) {\n" +
+                "        var totalTime = time.loadEventEnd - time.navigationStart;\n" +
+                "        var rr = JSON.parse(1.9);\n" +
+                "        if(totalTime > 5000) {\n" +
+                "            rr=0.8;\n" +
+                "        } else if(totalTime > 2000) {\n" +
+                "            rr=0.9;\n" +
+                "        }" +
+                "}";
+
+        double b = 1.023;
+        source = source.replaceFirst("JSON\\.parse\\(\\d+\\.?\\d+?\\)", "JSON.parse("+b+")");
+        System.out.println(source);
     }
 
     private <T> void genericMethod(T t) {
