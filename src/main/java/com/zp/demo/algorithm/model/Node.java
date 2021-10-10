@@ -11,4 +11,12 @@ public class Node<K, V>{
     public V value;
     public Node<K, V> next;
     public Node<K, V> prev;
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "key=" + key +
+                ", value=" + value +
+                '}';
+    }
 }

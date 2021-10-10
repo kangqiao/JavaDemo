@@ -2,7 +2,8 @@ package com.zp.demo.algorithm;
 
 public class 排序 {
     public static void main(String[] args) {
-        int[] nums = new int[] {4, 5, 3, 1, 2};
+        //int[] nums = new int[] {4, 5, 3, 1, 2};
+        int[] nums = new int[] {0, 4, 5, 6, 8, 3, 7, 1, 2, 9};
         //bubbleSort(nums);
         //selectSort(nums);
         //insertSort(nums);
@@ -57,12 +58,13 @@ public class 排序 {
     }
 
     //快速排序 O(nlog2n)
+    //{0, 4, 5, 6, 8, 3, 7, 1, 2, 9}
     public static void quickSort(int[] nums, int l, int r) {
         int i=l, j=r, t=nums[l];
         while (i < j) {
-            while (i < j && nums[j] > t) j--;
+            while (i < j && nums[j] > t) j--; //从右侧开始: 如果发现大于锚点t的数据, 结束循环, 将其存到锚点原来的位置i
             if (i<j) nums[i++] = nums[j];
-            while (i < j && nums[i] < t) i++;
+            while (i < j && nums[i] < t) i++; //从左侧开始: 如果发现小于锚点t的数据, 结束循环, 将其存到右侧移入锚点中数据的位置中
             if (i<j) nums[j--] = nums[i];
         }
         nums[i] = t;
