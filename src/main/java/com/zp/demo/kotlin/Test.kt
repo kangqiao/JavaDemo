@@ -9,10 +9,23 @@ import java.time.Duration
 import kotlin.system.measureTimeMillis
 
 
+var ucDomain: String? = null
+    set(value) {
+        println("field="+ field)
+        println("value="+value)
+        field = value
+    }
+
 // note that we don't have `runBlocking` to the right of `main` in this example
 fun main() {
     //testRunBlocking()
-    testAsyncAwait()
+    //testAsyncAwait()
+    ucDomain = "hello"
+    println(ucDomain)
+    println("zhaopan ===  ")
+    ucDomain = "world"
+    println(ucDomain)
+
 }
 
 fun testRunBlocking() = runBlocking<Unit> {

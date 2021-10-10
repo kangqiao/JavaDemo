@@ -4,9 +4,8 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.math.BigInteger;
+import java.net.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,7 +18,49 @@ public class Main {
 
     String a = "a";
 
-    public static void main(String[] args) {
+    public static URI appendUri(String uri, String appendQuery) throws URISyntaxException {
+        URI oldUri = new URI(uri);
+
+        String newQuery = oldUri.getQuery();
+        if (newQuery == null) {
+            newQuery = appendQuery;
+        } else {
+            newQuery += "&" + appendQuery;
+        }
+
+        URI newUri = new URI(oldUri.getScheme(), oldUri.getAuthority(),
+                oldUri.getPath(), newQuery, oldUri.getFragment());
+
+        return newUri;
+    }
+
+
+
+    public static String hex2num(String hex) {
+        if (hex != null && hex.length() > 0) {
+            try {
+                hex = hex.startsWith("0x")? hex.substring(2): hex;
+                return new BigInteger(hex, 16).toString();
+            } catch (NumberFormatException e) {
+                //Log.e(TAG, "hex2num catch NumberFormatException", e);
+            }
+        }
+        return "0";
+    }
+
+
+    public static void main(String[] args) throws MalformedURLException, URISyntaxException {
+
+        String hex = "0x2a7d1db34";
+        System.out.println(hex2num(hex));
+//        System.out.println(appendUri("http://example.com", "name=John"));
+//        System.out.println(appendUri("http://example.com#fragment", "name=John"));
+//        System.out.println(appendUri("http://example.com?email=john.doe@email.com", "name=John"));
+//        System.out.println(appendUri("http://example.com?email=john.doe@email.com#fragment", "name=John"));
+
+
+
+
 //        System.out.println(~0);
 //        Main main = new Main();
 //
@@ -78,19 +119,19 @@ public class Main {
 //        System.out.println(str2.intern() == str2);
 
 
-        String source = "function wrapTime(time) {\n" +
-                "        var totalTime = time.loadEventEnd - time.navigationStart;\n" +
-                "        var rr = JSON.parse(1.9);\n" +
-                "        if(totalTime > 5000) {\n" +
-                "            rr=0.8;\n" +
-                "        } else if(totalTime > 2000) {\n" +
-                "            rr=0.9;\n" +
-                "        }" +
-                "}";
-
-        double b = 1.023;
-        source = source.replaceFirst("JSON\\.parse\\(\\d+\\.?\\d+?\\)", "JSON.parse("+b+")");
-        System.out.println(source);
+//        String source = "function wrapTime(time) {\n" +
+//                "        var totalTime = time.loadEventEnd - time.navigationStart;\n" +
+//                "        var rr = JSON.parse(1.9);\n" +
+//                "        if(totalTime > 5000) {\n" +
+//                "            rr=0.8;\n" +
+//                "        } else if(totalTime > 2000) {\n" +
+//                "            rr=0.9;\n" +
+//                "        }" +
+//                "}";
+//
+//        double b = 1.023;
+//        source = source.replaceFirst("JSON\\.parse\\(\\d+\\.?\\d+?\\)", "JSON.parse("+b+")");
+//        System.out.println(source);
     }
 
     private <T> void genericMethod(T t) {
